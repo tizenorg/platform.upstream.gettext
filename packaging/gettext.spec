@@ -14,7 +14,7 @@ License:        GPLv3+ and LGPLv2+
 Summary:        GNU libraries and utilities for producing multi-lingual messages
 Url:            http://www.gnu.org/software/gettext/
 Group:          Development/Tools
-Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
+Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.bz2
 Source2:        msghack.py
 Source1001:     packaging/gettext.manifest
 
