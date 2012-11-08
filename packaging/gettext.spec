@@ -17,8 +17,6 @@ Group:          Development/Tools
 Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
 Source2:        msghack.py
 Source1001:     packaging/gettext.manifest
-Patch0:         no_examples.patch
-Patch1:         getext-stdio.in.patch
 
 BuildRequires:  autoconf >= 2.5
 BuildRequires:  bison
@@ -74,8 +72,6 @@ This package contains libraries used internationalization support.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
 
 
 %build
