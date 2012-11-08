@@ -1,0 +1,17 @@
+* Mon Feb 10 2014 Maciej Wereski <m.wereski@partner.samsung.com> upstream/0.18.3.2
+- Upgrade to 0.18.3.2
+
+* Mon Feb 10 2014 Karol Lewandowski <k.lewandowsk@samsung.com>
+- Add BuildRequire to enable iconv support
+- Fix RPMLINT
+
+* Tue Nov 19 2013 Ronan Le Martret <ronan@fridu.net> fe945ec
+- packaging: create a directory to fix %reconfigure (DEVT-123)
+
+* Fri Jun 28 2013 Alexandru Cornea <alexandru.cornea@intel.com> 85c26f5
+- resetting manifest requested domain to floor
+
+* Thu Nov 8 2012 Anas Nashif <anas.nashif@intel.com> 3351151
+- add packaging
+- Imported Upstream version 0.18.1.1
+
