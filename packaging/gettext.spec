@@ -137,7 +137,7 @@ cat %{name}-*.lang > %{name}.lang
 %files tools -f %{name}.lang
 %manifest gettext.manifest
 %defattr(-,root,root,-)
-%doc COPYING
+%license COPYING
 %{_datadir}/%{name}/projects/*
 %{_datadir}/%{name}/config.rpath
 %{_datadir}/%{name}/*.h
