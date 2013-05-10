@@ -187,7 +187,7 @@ cat %{name}-*.lang > %{name}.lang
 %defattr(-,root,root,-)
 # Files listed here should be of LGPL license only, refer to upstream
 # statement in PACKAGING file
-%doc gettext-runtime/intl/COPYING*
+%license gettext-runtime/intl/COPYING*
 %doc %{_datadir}/gettext/ABOUT-NLS
 %{_bindir}/gettext
 %{_bindir}/ngettext
