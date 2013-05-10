@@ -10,7 +10,7 @@
 Name:           gettext
 Version:        0.18.1.1
 Release:        2
-License:        GPLv3+ and LGPLv2+
+License:	GPL-2.0+
 Summary:        GNU libraries and utilities for producing multi-lingual messages
 Url:            http://www.gnu.org/software/gettext/
 Group:          Development/Tools
