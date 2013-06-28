@@ -16,7 +16,7 @@ Url:            http://www.gnu.org/software/gettext/
 Group:          Development/Tools
 Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.bz2
 Source2:        msghack.py
-Source1001:     packaging/gettext.manifest
+Source1001:     gettext.manifest
 
 BuildRequires:  autoconf >= 2.5
 BuildRequires:  bison
@@ -135,7 +135,7 @@ cat %{name}-*.lang > %{name}.lang
 
 
 %files tools -f %{name}.lang
-%manifest gettext.manifest
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %doc COPYING
 %{_datadir}/%{name}/projects/*
@@ -183,7 +183,7 @@ cat %{name}-*.lang > %{name}.lang
 # involve unneeded files. If you need to include a file in -libs, list
 # it here explicitly
 %files runtime
-%manifest gettext.manifest
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 # Files listed here should be of LGPL license only, refer to upstream
 # statement in PACKAGING file
