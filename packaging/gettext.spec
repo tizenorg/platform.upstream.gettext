@@ -13,7 +13,7 @@ Release:        2
 License:	GPL-2.0+
 Summary:        GNU libraries and utilities for producing multi-lingual messages
 Url:            http://www.gnu.org/software/gettext/
-Group:          Development/Tools
+Group:          System/Localization
 Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.bz2
 Source2:        msghack.py
 Source1001:     gettext.manifest
@@ -49,7 +49,6 @@ gettext-devel for transition.
 %package tools
 License:        GPL-3.0+
 Summary:        Development files for %{name}
-Group:          Development/Tools
 Requires:       %{name}-runtime = %{version}
 Obsoletes:      gettext-devel <= 0.18.1.1-1.15
 Provides:       gettext-devel
@@ -63,7 +62,6 @@ want to add gettext support for your project.
 %package runtime
 License:        LGPL-2.0+
 Summary:        Libraries for %{name}
-Group:          System/Libraries
 Obsoletes:      gettext-libs <= 0.18.1.1-1.15
 Provides:       gettext-libs
 
@@ -72,10 +70,10 @@ This package contains libraries used internationalization support.
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 
 %build
-cp %{SOURCE1001} .
 [ -f  %{_datadir}/automake/depcomp ] && cp -f %{_datadir}/automake/{depcomp,ylwrap} .
 
 %ifarch %arm
