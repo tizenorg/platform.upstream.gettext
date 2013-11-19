@@ -85,6 +85,8 @@ cp %{SOURCE1001} .
 %else
 %endif
 
+mkdir -p gettext-tools/intl
+
 %reconfigure --without-included-gettext --enable-nls --disable-static \
     --enable-shared --with-pic-=yes --disable-csharp --without-libpth-prefix --disable-openmp
 make %{?_smp_mflags} GCJFLAGS="-findirect-dispatch"
