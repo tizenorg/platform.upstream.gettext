@@ -10,7 +10,7 @@
 Name:           gettext
 Version:        0.18.1.1
 Release:        2
-License:        GPLv3+ and LGPLv2+
+License:        GPL-3.0+ and LGPL-2.0+
 Summary:        GNU libraries and utilities for producing multi-lingual messages
 Url:            http://www.gnu.org/software/gettext/
 Group:          Development/Tools
@@ -135,11 +135,14 @@ cat %{name}-*.lang > %{name}.lang
 
 %postun runtime -p /sbin/ldconfig
 
+%post tools -p /sbin/ldconfig
+
+%postun tools -p /sbin/ldconfig
 
 %files tools -f %{name}.lang
 %manifest %{name}.manifest
 %defattr(-,root,root,-)
-%doc COPYING
+%license COPYING
 %{_datadir}/%{name}/projects/*
 %{_datadir}/%{name}/config.rpath
 %{_datadir}/%{name}/*.h
@@ -189,7 +192,7 @@ cat %{name}-*.lang > %{name}.lang
 %defattr(-,root,root,-)
 # Files listed here should be of LGPL license only, refer to upstream
 # statement in PACKAGING file
-%doc gettext-runtime/intl/COPYING*
+%license gettext-runtime/intl/COPYING*
 %doc %{_datadir}/gettext/ABOUT-NLS
 %{_bindir}/gettext
 %{_bindir}/ngettext
