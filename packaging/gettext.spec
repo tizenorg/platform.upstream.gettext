@@ -26,6 +26,7 @@ BuildRequires:  gcc-c++
 BuildRequires:  libtool
 #needed for ANSI to UTF8 conversion using msgconn
 BuildRequires:  libunistring
+BuildRequires:  glibc-locale
 
 %description
 The GNU gettext package provides a set of tools and documentation for
