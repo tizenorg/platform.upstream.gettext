@@ -1,3 +1,7 @@
+* Mon Feb 10 2014 Karol Lewandowski <k.lewandowsk@samsung.com>
+- Add BuildRequire to enable iconv support
+- Fix RPMLINT
+
 * Tue Nov 19 2013 Ronan Le Martret <ronan@fridu.net> fe945ec
 - packaging: create a directory to fix %reconfigure (DEVT-123)
 
