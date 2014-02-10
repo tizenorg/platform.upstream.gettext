@@ -8,13 +8,13 @@
 %define enable_testing 0
 
 Name:           gettext
-Version:        0.18.1.1
-Release:        2
+Version:        0.18.3.2
+Release:        1
 License:        GPL-3.0+ and LGPL-2.0+
 Summary:        GNU libraries and utilities for producing multi-lingual messages
 Url:            http://www.gnu.org/software/gettext/
 Group:          Development/Tools
-Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.bz2
+Source:         ftp://ftp.gnu.org/gnu/gettext/%{name}-%{version}.tar.gz
 Source2:        msghack.py
 Source1001:     gettext.manifest
 
@@ -163,7 +163,7 @@ cat %{name}-*.lang > %{name}.lang
 %{_libdir}/gettext/user-email
 %{_libdir}/libgettextpo.so.*
 %{_datadir}/%{name}/javaversion.class
-%{_datadir}/%{name}/archive*.tar.gz
+%{_datadir}/%{name}/archive*.tar.xz
 %{_datadir}/%{name}/styles
 %{_bindir}/autopoint
 %{_bindir}/gettextize
