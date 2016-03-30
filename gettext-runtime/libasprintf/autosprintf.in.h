@@ -39,7 +39,7 @@ namespace gnu
 {
   /* A temporary object, usually allocated on the stack, representing
      the result of an asprintf() call.  */
-  class autosprintf
+  class __attribute__ ((visibility ("default"))) autosprintf
   {
   public:
     /* Constructor: takes a format string and the printf arguments.  */
@@ -54,7 +54,7 @@ namespace gnu
     operator char * () const;
     operator std::string () const;
     /* Output to an ostream.  */
-    friend inline std::ostream& operator<< (std::ostream& stream, const autosprintf& tmp)
+    __attribute__ ((visibility ("default"))) friend inline std::ostream& operator<< (std::ostream& stream, const autosprintf& tmp)
     {
       stream << (tmp.str ? tmp.str : "(error in autosprintf)");
       return stream;
