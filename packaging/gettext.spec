@@ -76,6 +76,9 @@ This package contains libraries used internationalization support.
 
 
 %build
+export CFLAGS+=" -fvisibility=hidden"
+  export CXXFLAGS+=" -fvisibility=hidden"
+  
 cp %{SOURCE1001} .
 [ -f  %{_datadir}/automake/depcomp ] && cp -f %{_datadir}/automake/{depcomp,ylwrap} .
 
