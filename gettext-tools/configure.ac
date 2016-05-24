@@ -1,5 +1,5 @@
 dnl Configuration for the gettext-tools directory of GNU gettext
-dnl Copyright (C) 1995-1999, 2000-2011 Free Software Foundation, Inc.
+dnl Copyright (C) 1995-2011, 2015 Free Software Foundation, Inc.
 dnl
 dnl This program is free software: you can redistribute it and/or modify
 dnl it under the terms of the GNU General Public License as published by
@@ -17,16 +17,16 @@ dnl along with this program.  If not, see <http://www.gnu.org/licenses/>.
 dnl Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.62])
-AC_INIT
+AC_INIT([gettext-tools],
+	m4_esyscmd([../build-aux/git-version-gen ../.tarball-version]),
+	[bug-gnu-gettext@gnu.org])
 AC_CONFIG_SRCDIR([src/msgfmt.c])
 AC_CONFIG_AUX_DIR([../build-aux])
-. $srcdir/../version.sh
-gl_INIT_PACKAGE([gettext-tools], [$VERSION_NUMBER])
 AM_INIT_AUTOMAKE([1.11.1 silent-rules parallel-tests])
 AC_CONFIG_HEADERS([config.h])
 
 dnl Installation directories.
-test "$docdir" != '${datarootdir}/doc/${PACKAGE}' || docdir='${datarootdir}/doc/gettext'
+test "$docdir" != '${datarootdir}/doc/${PACKAGE_TARNAME}' || docdir='${datarootdir}/doc/gettext'
 
 dnl Checks for programs.
 AC_PROG_CC
@@ -286,29 +286,10 @@ AH_BOTTOM([
 #endif
 
 /* Extra OS/2 (emx+gcc) defines.  */
-#ifdef __EMX__
+#if defined __EMX__ && !defined __KLIBC__
 # include "intl/os2compat.h"
 #endif
 ])
-
-dnl Check for the expat XML parser.
-dnl On operating systems where binary distribution vendors are likely to
-dnl ship both gettext and expat, we use dynamic loading to avoid a hard
-dnl dependency from gettext to expat.
-case "$host_os" in
-  linux*)
-    AC_DEFINE([DYNLOAD_LIBEXPAT], [1],
-      [Define to 1 if libexpat shall be dynamically loaded via dlopen().])
-    LIBEXPAT="-ldl"
-    LTLIBEXPAT="-ldl"
-    AC_SUBST([LIBEXPAT])
-    AC_SUBST([LTLIBEXPAT])
-    ;;
-  *)
-    AC_LIB_HAVE_LINKFLAGS([expat], [],
-      [#include <expat.h>], [XML_ExpatVersion();])
-    ;;
-esac
 
 dnl Check for nm output filter that yields the exported symbols.
 gt_GLOBAL_SYMBOL_PIPE
@@ -458,6 +439,14 @@ changequote([,])dnl
 fi
 AC_SUBST([ARCHIVE_FORMAT])
 
+ARCHIVE_VERSION=0.19.7
+AC_SUBST([ARCHIVE_VERSION])
+
+PACKAGE_SUFFIX="-$ARCHIVE_VERSION"
+AC_SUBST([PACKAGE_SUFFIX])
+AC_DEFINE_UNQUOTED(PACKAGE_SUFFIX, "$PACKAGE_SUFFIX",
+  [Define to the suffix of this package])
+
 dnl Check for tools needed for formatting the documentation.
 ac_aux_dir_abs=`cd $ac_aux_dir && pwd`
 AC_PATH_PROG([DVIPS], [dvips], [$ac_aux_dir_abs/missing dvips])
@@ -499,12 +488,6 @@ AC_SUBST([TESTLIBASPRINTF])
 dnl Generate the version information file in the intl/ directory.
 test -d intl || mkdir intl
 echo "GNU gettext library from gettext-$VERSION" > intl/VERSION
-cat > intl/ChangeLog.inst <<EOF
-$RELEASE_DATE  GNU  <bug-gnu-gettext@gnu.org>
-
-	* Version $VERSION released.
-
-EOF
 
 AC_CONFIG_SUBDIRS([examples])
 
@@ -514,11 +497,15 @@ AC_CONFIG_FILES([doc/Makefile])
 
 AC_CONFIG_FILES([intl/Makefile:../gettext-runtime/intl/Makefile.in], [
   # Change srcdir variable so that it points to ../gettext-runtime/intl.
+  # Change PLURAL_OBJECT variable so that pluralx.c is used instead of plural.c.
   sed -e 's|^srcdir =.*$|srcdir = $(top_srcdir)/../gettext-runtime/intl|' \
       -e 's|^VPATH =.*$||' \
+      -e 's|^PLURAL_OBJECT = .*$|PLURAL_OBJECT = pluralx.\$lo|' \
     < intl/Makefile > intl/Makefile.tmp
   mv intl/Makefile.tmp intl/Makefile
   ])
+
+AC_CONFIG_FILES([its/Makefile])
 
 AC_CONFIG_FILES([gnulib-lib/Makefile])
 
@@ -548,6 +535,8 @@ AC_CONFIG_FILES([man/x-to-1])
 AC_CONFIG_FILES([m4/Makefile])
 
 AC_CONFIG_FILES([tests/Makefile])
+
+AC_CONFIG_FILES([tests/init-env])
 
 AC_CONFIG_FILES([gnulib-tests/Makefile])
 

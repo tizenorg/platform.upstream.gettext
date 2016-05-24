@@ -60,6 +60,16 @@ Tcl mode: generate a tcl/msgcat @file{.msg} file.
 @cindex Qt mode, and @code{msgfmt} program
 Qt mode: generate a Qt @file{.qm} file.
 
+@item --desktop
+@opindex --desktop@r{, @code{msgfmt} option}
+@cindex Desktop Entry mode, and @code{msgfmt} program
+Desktop Entry mode: generate a @file{.desktop} file.
+
+@item --xml
+@opindex --xml@r{, @code{msgfmt} option}
+@cindex XML mode, and @code{msgfmt} program
+XML mode: generate an XML file.
+
 @end table
 
 @subsection Output file location
@@ -106,6 +116,10 @@ or a combined language and country specification of the form @var{ll_CC}.
 @item -d @var{directory}
 @opindex -d@r{, @code{msgfmt} option}
 Specify the base directory of classes directory hierarchy.
+
+@item --source
+@opindex --source@r{, @code{msgfmt} option}
+Produce a .java source file, instead of a compiled .class file.
 
 @end table
 
@@ -157,6 +171,106 @@ Specify the base directory of @file{.msg} message catalogs.
 
 The @samp{-l} and @samp{-d} options are mandatory.  The @file{.msg} file is
 written in the specified directory.
+
+@subsection Desktop Entry mode operations
+
+@table @samp
+@item --template=@var{template}
+@opindex --template@r{, @code{msgfmt} option}
+Specify a .desktop file used as a template.
+
+@item -k[@var{keywordspec}]
+@itemx --keyword[=@var{keywordspec}]
+@opindex -k@r{, @code{msgfmt} option}
+@opindex --keyword@r{, @code{msgfmt} option}
+Specify @var{keywordspec} as an additional keyword to be looked for.
+Without a @var{keywordspec}, the option means to not use default keywords.
+
+@item -l @var{locale}
+@itemx --locale=@var{locale}
+@opindex -l@r{, @code{msgfmt} option}
+@opindex --locale@r{, @code{msgfmt} option}
+Specify the locale name, either a language specification of the form @var{ll}
+or a combined language and country specification of the form @var{ll_CC}.
+
+@item -d @var{directory}
+@opindex -d@r{, @code{msgfmt} option}
+Specify the directory where PO files are read.  The directory must
+contain the @samp{LINGUAS} file.
+
+@end table
+
+To generate a @samp{.desktop} file for a single locale, you can use it
+as follows.
+
+@example
+msgfmt --desktop --template=@var{template} --locale=@var{locale} \
+  -o @var{file} @var{filename}.po @dots{}
+@end example
+
+msgfmt provides a special "bulk" operation mode to process multiple
+@file{.po} files at a time.
+
+@example
+msgfmt --desktop --template=@var{template} -d @var{directory} -o @var{file}
+@end example
+
+msgfmt first reads the @samp{LINGUAS} file under @var{directory}, and
+then processes all @samp{.po} files listed there.  You can also limit
+the locales to a subset, through the @samp{LINGUAS} environment
+variable.
+
+For either operation modes, the @samp{-o} and @samp{--template}
+options are mandatory.
+
+@subsection XML mode operations
+
+@table @samp
+@item --template=@var{template}
+@opindex --template@r{, @code{msgfmt} option}
+Specify an XML file used as a template.
+
+@item -L @var{name}
+@itemx --language=@var{name}
+@opindex -L@r{, @code{msgfmt} option}
+@opindex --language@r{, @code{msgfmt} option}
+@cindex supported languages, @code{msgfmt}
+Specifies the language of the input files.
+
+@item -l @var{locale}
+@itemx --locale=@var{locale}
+@opindex -l@r{, @code{msgfmt} option}
+@opindex --locale@r{, @code{msgfmt} option}
+Specify the locale name, either a language specification of the form @var{ll}
+or a combined language and country specification of the form @var{ll_CC}.
+
+@item -d @var{directory}
+@opindex -d@r{, @code{msgfmt} option}
+Specify the base directory of @file{.po} message catalogs.
+
+@end table
+
+To generate an XML file for a single locale, you can use it as follows.
+
+@example
+msgfmt --xml --template=@var{template} --locale=@var{locale} \
+  -o @var{file} @var{filename}.po @dots{}
+@end example
+
+msgfmt provides a special "bulk" operation mode to process multiple
+@file{.po} files at a time.
+
+@example
+msgfmt --xml --template=@var{template} -d @var{directory} -o @var{file}
+@end example
+
+msgfmt first reads the @samp{LINGUAS} file under @var{directory}, and
+then processes all @samp{.po} files listed there.  You can also limit
+the locales to a subset, through the @samp{LINGUAS} environment
+variable.
+
+For either operation modes, the @samp{-o} and @samp{--template}
+options are mandatory.
 
 @subsection Input file syntax
 
