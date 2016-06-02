@@ -1,5 +1,6 @@
 ## Makefile for the gettext-runtime/tests subdirectory of GNU gettext
-## Copyright (C) 2005-2006, 2008-2009 Free Software Foundation, Inc.
+## Copyright (C) 2005-2006, 2008-2009, 2015 Free Software Foundation,
+## Inc.
 ##
 ## This program is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
@@ -16,7 +17,7 @@
 
 ## Process this file with automake to produce Makefile.in.
 
-AUTOMAKE_OPTIONS = 1.11 gnits no-dependencies color-tests
+AUTOMAKE_OPTIONS = 1.11 gnits no-dependencies color-tests subdir-objects
 EXTRA_DIST =
 
 TESTS = test-lock
@@ -25,7 +26,7 @@ AM_CPPFLAGS = \
   -I.. \
   -I$(srcdir)/../intl
 
-noinst_PROGRAMS = test-lock
+check_PROGRAMS = test-lock
 test_lock_SOURCES = test-lock.c ../intl/lock.c ../intl/threadlib.c
 test_lock_LDADD = @LIBMULTITHREAD@ @LIBSCHED@
 
